@@ -1,11 +1,5 @@
-# Let's put all the students in an Array
-def print_header
-puts "The students of Villains Academy"
-puts "------------------------"
-end
-
 def input_students
-  puts "Please enter the name of the students"
+  puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
@@ -16,30 +10,32 @@ def input_students
     # add the student hash to the array
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
-    # get another name 
+    # get another name from the user
     name = gets.chomp
   end
-return students
+  # return the array of students
+  students
 end
 
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
 
-
-
-# finally, we print the total number of students
 def print(students)
-  students.each_with_index do |student, index|
-     if student[:name].length < 12
-     puts "#{student[:name]} (#{student[:cohort]} cohort)"
-     end
+  i = 0
+  while i < students.length do
+      puts "#{students[i][:name]} cohort #{students[i][:cohort]}"
+      i = i + 1
   end
 end
 
-def print_footer(names)
-puts "Overall, we have #{names.count} great students"
+def print_footer(students)
+  puts "Overall, we have #{students.count} great students"
 end
 
-#nothing happens until we call the methods
 students = input_students
+#nothing happens until we call the methods
 print_header
 print(students)
 print_footer(students)
