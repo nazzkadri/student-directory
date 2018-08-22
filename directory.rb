@@ -4,19 +4,53 @@ def input_students
   # create an empty array
   students = []
   # get the first name
+  # pattern = "/^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$/"
   name = gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
+  
+  
+def validate_name(name)
+  pattern = "^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$"
+  if name.match?(pattern)
+     return true
+  else
+    return false
+  end
+end
+  
+  while !name.empty?  do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    flag = validate_name(name)
+    while flag == false do
+      puts "Please check your name again"
+      name = gets.chomp
+      flag = validate_name(name)
+    end
+    cohort = validate_cohort
+    students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students".center(30)
     # get another name from the user
+    puts "Please enter your name"
     name = gets.chomp
   end
   # return the array of students
-  students
+  return students
 end
-
+  
+  def validate_cohort
+    year = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+    puts "Please enter your cohort"
+    cohort = gets.chomp
+    if cohort.empty? 
+      cohort = "november"
+    end
+    while !year.include?(cohort.downcase) do
+      puts "Invalid Input"
+      cohort = gets.chomp
+    end
+    return cohort
+  end
+  # while the name is not empty, repeat this code
+  
 def print_header
   puts "The students of Villains Academy".center(60)
   puts "-------------".center(60)
