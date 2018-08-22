@@ -23,7 +23,7 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
+    students.each do |student|
     puts ""#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
@@ -35,6 +35,8 @@ end
 
 
 students = input_students
-print_header
+if !students.empty? 
+     print_header
 print(students)
 print_footer(students)
+end
