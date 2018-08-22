@@ -4,78 +4,37 @@ def input_students
   # create an empty array
   students = []
   # get the first name
-  # pattern = "/^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$/"
   name = gets.chomp
-    
-def validate_name(name)
-  pattern = "^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$"
-  if name.match?(pattern)
-     return true
-  else
-    return false
-  end
-end
-  
-  while !name.empty?  do
-    # add the student hash to the array
-    flag = validate_name(name)
-    while flag == false do
-      puts "Please check your name again"
-      name = gets.chomp
-      flag = validate_name(name)
-    end
-    cohort = validate_cohort
-    students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students".center(30)
-    # get another name from the user
-    puts "Please enter your name"
-    name = gets.chomp
+  # while the name is not empty, repeat this code
+  while !name.empty? do
+  # add the student hash to the array
+  students << {name: name, cohort: :november}
+  puts "Now we have #{students.count} students"
+  # get another name from the user
+  name = gets.chomp
   end
   # return the array of students
   return students
 end
-  
-  def validate_cohort
-    year = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
-    puts "Please enter your cohort"
-    cohort = gets.chomp
-    if cohort.empty? 
-      cohort = "november"
-    end
-    while !year.include?(cohort.downcase) do
-      puts "Invalid Input"
-      cohort = gets.chomp
-    end
-    return cohort
-  end
-  # while the name is not empty, repeat this code
-  
+
 def print_header
-  puts "The students of Villains Academy".center(60)
-  puts "-------------".center(60)
+  puts "The students of my cohort at Makers Academy"
+  puts "-------------"
 end
 
 def print(students)
-   cohort = students.map {|student| student[:cohort]}.uniq
-   cohort.each do |month|
-     students.each do |student|
-      if student[:cohort] == month
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
-      end
-     end
+  students.each do |student|
+    puts ""#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
-def print_footer(students)
-  if students.count == 1
-    puts "Now we have one student".center(60)
-  else
-  puts "Overall, we have #{students.count} great students".center(60)
-  end
+
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students"
 end
+
 
 students = input_students
-#nothing happens until we call the methods
 print_header
 print(students)
 print_footer(students)
