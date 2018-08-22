@@ -6,8 +6,7 @@ def input_students
   # get the first name
   # pattern = "/^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$/"
   name = gets.chomp
-  
-  
+    
 def validate_name(name)
   pattern = "^[a-zA-Z\-\`]++(?: [a-zA-Z\-\`]++)?$"
   if name.match?(pattern)
@@ -57,10 +56,13 @@ def print_header
 end
 
 def print(students)
-  i = 0
-  while i < students.length do
-      puts "#{students[i][:name]} cohort #{students[i][:cohort]}".center(60)
-      i = i + 1
+   cohort = students.map {|student| student[:cohort]}.uniq
+   cohort.each do |month|
+     students.each do |student|
+      if student[:cohort] == month
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+      end
+     end
   end
 end
 
