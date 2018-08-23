@@ -46,14 +46,18 @@ def try_load_students
     load_students
     puts "Loaded #{@students.count} from students.csv"
   else
-    if File.exists?(filename) 
+    check_file_exists(filename) 
+  end
+end
+
+def check_file_exists(filename)
+  if File.exists?(filename) 
       load_students(filename)
       puts "Loaded #{@students.count} from #{filename}"
-    else
+  else
       # if it doesn't exist
       puts "Sorry, #{filename} doesn't exist."
       exit # quit the program
-    end
   end
 end
 
