@@ -67,13 +67,13 @@ end
 
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-      add_students(name, cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+    name, cohort = line.chomp.split(',')
+    add_students(name, cohort)
     # @students << {name: name, cohort: cohort.to_sym}
+    end
   end
-  file.close
 end
 
 def add_students(name, cohort)
@@ -105,14 +105,14 @@ def save_students
   puts "Please enter the name of the file you want to save your list"
   filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open(filename, "w")
-  # iterate over the array of students
-  @students.each do |student|
+  File.open(filename, "w") do |file|
+    # iterate over the array of students
+    @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
+    end
   end
-  file.close
 end
 
 
