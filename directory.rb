@@ -20,12 +20,15 @@ def process(selection)
   case selection
     when "1"
       input_students
+      puts "Your inputs are successful"
     when "2"
       show_students
     when"3"
-      save_students  
+      save_students
+      puts "Successfully saved students to the file, enter 4 to load the updated list"
     when "4"
       load_students
+      puts "Updated list of students loaded from the file, enter 2 to see the list"
     when "9"
       exit
     else
@@ -66,6 +69,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
+  
     add_students(name, cohort)
     # @students << {name: name, cohort: cohort.to_sym}
   end
@@ -73,7 +77,7 @@ def load_students(filename = "students.csv")
 end
 
 def add_students(name, cohort)
-  
+  return if cohort.nil?
   @students << {name: name, cohort: cohort.to_sym}
 
 end
