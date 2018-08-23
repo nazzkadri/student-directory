@@ -1,3 +1,4 @@
+require 'csv'
 @students = [] # an empty array accessible to all methods
 
 def interactive_menu
@@ -68,10 +69,10 @@ end
 
 def load_students(filename = "students.csv")
   File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    add_students(name, cohort)
-    # @students << {name: name, cohort: cohort.to_sym}
+    CSV.foreach(file) do |line|
+      name = line[0]
+      cohort = line[1]
+      add_students(name, cohort)
     end
   end
 end
