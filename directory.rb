@@ -27,7 +27,9 @@ def process(selection)
       save_students
       puts "Successfully saved students to the file, enter 4 to load the updated list"
     when "4"
-      load_students
+      puts "Please enter the name of a file you want to load students from"
+      filename = STDIN.gets.chomp
+      load_students(filename)
       puts "Updated list of students loaded from the file, enter 2 to see the list"
     when "9"
       exit
@@ -35,7 +37,6 @@ def process(selection)
       puts "I don't know what you mean, try again"
   end
 end
-
 
 def show_students
   print_header
@@ -69,8 +70,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-  
-    add_students(name, cohort)
+      add_students(name, cohort)
     # @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
@@ -102,8 +102,10 @@ def input_students
 end
 
 def save_students
+  puts "Please enter the name of the file you want to save your list"
+  filename = STDIN.gets.chomp
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
