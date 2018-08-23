@@ -41,14 +41,19 @@ def show_students
 end
 
 def try_load_students
-  filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename) 
-    load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
+  filename = ARGV.first 
+  if filename.nil? 
+    load_students
+    puts "Loaded #{@students.count} from students.csv"
   else
-    puts "Sorry, #{filename} doesn't exist."
-    exit
+    if File.exists?(filename) 
+      load_students(filename)
+      puts "Loaded #{@students.count} from #{filename}"
+    else
+      # if it doesn't exist
+      puts "Sorry, #{filename} doesn't exist."
+      exit # quit the program
+    end
   end
 end
 
@@ -117,7 +122,7 @@ def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
 
-# try_load_students
+try_load_students
 interactive_menu
 
 
